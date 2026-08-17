@@ -1,0 +1,19 @@
+# Environment
+.env
+
+# Rust
+/target
+**/*.rs.bk
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Plan file (not shipped)
+passkey-auth-plan.md

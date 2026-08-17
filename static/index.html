@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="FIDO2/WebAuthn passkey authentication demo — register and sign in with biometrics, no passwords.">
+    <title>Passkey Auth — FIDO2 WebAuthn Demo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div class="app">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-inner">
+                <div class="logo">
+                    <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                        <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                        <circle cx="12" cy="16" r="1"/>
+                    </svg>
+                    <span>Passkey Auth</span>
+                </div>
+                <div id="user-badge" class="user-badge hidden">
+                    <span id="user-display"></span>
+                    <button id="btn-logout" class="btn btn-ghost btn-sm" onclick="logout()">Sign Out</button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main content -->
+        <main class="main">
+            <!-- Auth section (shown when NOT logged in) -->
+            <section id="auth-section" class="auth-section">
+                <div class="hero">
+                    <h1>Passwordless Authentication</h1>
+                    <p class="hero-sub">Sign in with your fingerprint, face, or security key. No passwords, ever.</p>
+                </div>
+
+                <div class="auth-card">
+                    <div class="input-group">
+                        <label for="username">Username</label>
+                        <input
+                            type="text"
+                            id="username"
+                            placeholder="e.g. ahmad"
+                            maxlength="64"
+                            autocomplete="username webauthn"
+                        >
+                    </div>
+
+                    <div class="auth-buttons">
+                        <button id="btn-register" class="btn btn-primary" onclick="register()">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="btn-icon">
+                                <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                                <circle cx="8.5" cy="7" r="4"/>
+                                <line x1="20" y1="8" x2="20" y2="14"/>
+                                <line x1="23" y1="11" x2="17" y2="11"/>
+                            </svg>
+                            Create Passkey
+                        </button>
+                        <button id="btn-login" class="btn btn-secondary" onclick="login()">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="btn-icon">
+                                <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/>
+                                <polyline points="10 17 15 12 10 7"/>
+                                <line x1="15" y1="12" x2="3" y2="12"/>
+                            </svg>
+                            Sign In
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Status messages -->
+                <div id="status" class="status hidden"></div>
+            </section>
+
+            <!-- Dashboard section (shown when logged in) -->
+            <section id="dashboard-section" class="dashboard-section hidden">
+                <div class="dashboard-header">
+                    <h2>Your Passkeys</h2>
+                    <p>Manage the passkeys registered to your account.</p>
+                </div>
+
+                <div id="credentials-list" class="credentials-list">
+                    <!-- Populated by JS -->
+                </div>
+
+                <div class="add-passkey">
+                    <button class="btn btn-primary" onclick="registerAdditional()">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="btn-icon">
+                            <line x1="12" y1="5" x2="12" y2="19"/>
+                            <line x1="5" y1="12" x2="19" y2="12"/>
+                        </svg>
+                        Add Another Passkey
+                    </button>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>FIDO2/WebAuthn Demo &middot; Built with Rust &amp; Axum &middot; <a href="https://github.com/itsahmadyaseen/passkey-auth" target="_blank">Source</a></p>
+        </footer>
+    </div>
+
+    <script src="/app.js"></script>
+</body>
+</html>
